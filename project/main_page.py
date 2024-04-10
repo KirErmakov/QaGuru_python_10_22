@@ -26,6 +26,8 @@ class MainPage:
             browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/primaryTextView')).should(have.text('Data & Privacy'))
             browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_done_button')).click()
 
+    @staticmethod
+    def check_search():
         with allure.step('Check search page'):
             browser.element((AppiumBy.ACCESSIBILITY_ID, 'Search Wikipedia')).should(be.visible)
 
