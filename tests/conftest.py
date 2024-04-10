@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from utils import attach
 from appium import webdriver
 from selene import browser
-from config import config_app
 
 
 def pytest_addoption(parser):
@@ -25,6 +24,7 @@ def context(request):
 
 @pytest.fixture(scope='function', autouse=True)
 def mobile_management(context):
+    from config import config_app
     with allure.step('Set options'):
         options = config_app.to_driver_options(context=context)
         browser.config.driver = webdriver.Remote(config_app.REMOTE_URL, options=options)
@@ -40,4 +40,4 @@ def mobile_management(context):
             attach.add_video(browser)
 
     with allure.step('Close driver'):
-        browser.config.driver.quit()
+        browser.quit()
