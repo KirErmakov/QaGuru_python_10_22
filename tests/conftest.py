@@ -17,14 +17,10 @@ def pytest_configure(config):
     load_dotenv(dotenv_path=env_file)
 
 
-@pytest.fixture
-def context(request):
-    return request.config.getoption("--context")
-
-
 @pytest.fixture(scope='function', autouse=True)
-def mobile_management(context):
+def mobile_management(request):
     from config import config_app
+    context = request.config.getoption("--context")
     with allure.step('Set options'):
         options = config_app.to_driver_options(context=context)
         browser.config.driver = webdriver.Remote(config_app.REMOTE_URL, options=options)
