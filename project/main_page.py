@@ -25,7 +25,6 @@ class MainPage:
         with allure.step('Check fourth screen'):
             browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/primaryTextView')).should(have.text('Data & Privacy'))
             browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_done_button')).click()
-            browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_done_button')).click()
 
         with allure.step('Check search page'):
             browser.element((AppiumBy.ACCESSIBILITY_ID, 'Search Wikipedia')).should(be.visible)

@@ -4,11 +4,7 @@ from pydantic_settings import BaseSettings
 from utils import path
 from appium.options.android import UiAutomator2Options
 
-# Загрузка переменных окружения из соответствующего файла .env в зависимости от контекста
-context = os.getenv('CONTEXT', 'emulator_local')
-load_dotenv('.env.bstack') if context == 'bstack' else load_dotenv('.env.emulator_local')
 
-# Загрузка общих переменных окружения
 load_dotenv()
 
 
@@ -23,10 +19,10 @@ class Config(BaseSettings):
     APP_WAIT_ACTIVITY: str = os.getenv('APP_WAIT_ACTIVITY')
     APP: str = os.getenv('APP')
 
-    def to_driver_options(self, test_context=context):
+    def to_driver_options(self, context):
         options = UiAutomator2Options()
 
-        if test_context == 'bstack':
+        if context == 'bstack':
             options.set_capability('remote_url', self.REMOTE_URL)
             options.set_capability('deviceName', self.DEVICE_NAME)
             options.set_capability('platformName', self.PLATFORM_NAME)
@@ -43,7 +39,7 @@ class Config(BaseSettings):
                 },
             )
 
-        elif test_context == 'emulator_local':
+        elif context == 'emulator_local':
             options.set_capability('remote_url', self.REMOTE_URL)
             options.set_capability('platformName', self.PLATFORM_NAME)
             options.set_capability('appWaitActivity', self.APP_WAIT_ACTIVITY)
