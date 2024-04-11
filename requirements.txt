@@ -1,7 +1,7 @@
 pytest==8.1.1
 selene==2.0.0rc7
-allure-pytest
-requests
-python-dotenv
-appium-python-client
-pydantic-settings
+allure-pytest==2.13.5
+requests==2.31.0
+python-dotenv==1.0.1
+appium-python-client==4.0.0
+pydantic-settings==2.2.1
